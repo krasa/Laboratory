@@ -1,6 +1,7 @@
 package krasa.laboratory.config;
 
 import krasa.laboratory.service.HelloService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
