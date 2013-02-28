@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 @WebService(endpointInterface = "laboratory.spring.krasa.Hello", serviceName = "Hello", targetNamespace = "http://krasa.spring.laboratory/")
 @Service
-public class HelloImpl implements Hello {
+public class HelloEndpoint implements Hello {
 	@Autowired
 	HelloService helloService;
 
