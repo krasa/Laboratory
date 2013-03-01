@@ -71,7 +71,7 @@
 
 	<wsdl:service name="Hello">
 		<wsdl:port binding="m:HelloSOAP" name="HelloSOAP">
-			<soap:address location="http://localhost:8080/services/hello"/>
+			<soap:address location="http://localhost:8080/hello"/>
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>

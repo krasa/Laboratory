@@ -1,4 +1,4 @@
-package krasa.laboratory.config;
+package krasa.laboratory.properties;
 
 import java.io.IOException;
 import java.util.Properties;

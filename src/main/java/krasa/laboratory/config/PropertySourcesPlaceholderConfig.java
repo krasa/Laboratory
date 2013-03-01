@@ -1,5 +1,7 @@
 package krasa.laboratory.config;
 
+import krasa.laboratory.properties.PropertiesLoader;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -14,7 +16,7 @@ public class PropertySourcesPlaceholderConfig {
 	}
 
 	@Bean
-	public PropertiesLoader propertiesLoader() {
+	public static PropertiesLoader propertiesLoader() {
 		return new PropertiesLoader();
 	}
 }

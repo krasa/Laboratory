@@ -1,16 +1,16 @@
 package krasa.laboratory.service;
 
+import krasa.laboratory.annotations.PropertyValue;
+import krasa.laboratory.enums.PropertiesEnum;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 
 public class HelloService {
 	@Autowired
 	Environment environment;
 
-	@Value("${hello}")
-	private String hello;
-	@Value("${environment}")
+	@PropertyValue(PropertiesEnum.ENVIRONMENT)
 	private String fromPropertyResolver;
 	private String fromJavaConfig;
 
@@ -18,7 +18,7 @@ public class HelloService {
 		System.err.println("from PropertyResolver " + fromPropertyResolver);
 		System.err.println("from Environment " + environment.getProperty("environment"));
 		System.err.println("from JavaConfig " + fromJavaConfig);
-		return hello;
+		return "hello";
 	}
 
 	public void setEnvironment(String environment) {
