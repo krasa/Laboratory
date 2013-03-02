@@ -11,11 +11,11 @@ public class HelloService {
 	Environment environment;
 
 	@PropertyValue(PropertiesEnum.ENVIRONMENT)
-	private String fromPropertyResolver;
+	private String customAnnotation;
 	private String fromJavaConfig;
 
 	public String hello() {
-		System.err.println("from PropertyResolver " + fromPropertyResolver);
+		System.err.println("from customAnnotation " + customAnnotation);
 		System.err.println("from Environment " + environment.getProperty("environment"));
 		System.err.println("from JavaConfig " + fromJavaConfig);
 		return "hello";

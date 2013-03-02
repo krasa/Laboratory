@@ -12,7 +12,12 @@ public enum PropertiesEnum implements ExpressionResolvable {
 	}
 
 	@Override
-	public String getResolvableValue() {
+	public String getResolvableExpression() {
 		return "${" + propertyName + "}";
 	}
+
+	public String getPropertyName() {
+		return propertyName;
+	}
+
 }
