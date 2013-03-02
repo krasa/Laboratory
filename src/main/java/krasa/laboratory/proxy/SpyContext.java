@@ -7,4 +7,8 @@ public class SpyContext {
 	public void setFilter(LoggingInvocationHandler filter) {
 		this.filter = filter;
 	}
+
+	public LoggingInvocationHandler getFilter() {
+		return filter;
+	}
 }

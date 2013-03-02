@@ -36,4 +36,21 @@ public class SpyCoreTest {
 			System.out.println(e.toString());
 		}
 	}
+
+	@Test
+	public void notCalledGetters2() throws Exception {
+		SpyCore core = new SpyCore();
+		SomeClasss object = new SomeClasss();
+
+		SomeClasss spy = core.createSpy(object);
+
+		try {
+			core.verifyAllGettersCalled();
+		} catch (VerifyException e) {
+			assertEquals(3, e.getVerify().getNumberOfFailed());
+			System.out.println(e.toString());
+		}
+		core.clear();
+		core.verifyAllGettersCalled();
+	}
 }

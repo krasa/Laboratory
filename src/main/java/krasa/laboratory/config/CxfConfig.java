@@ -9,11 +9,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-@Profile(EndpointConfig.PROFILE)
+@Profile(CxfConfig.PROFILE)
 @Configuration
-public class EndpointConfig {
-	public static final String NO_ENDPOINT = "NO_ENDPOINT";
-	protected static final String PROFILE = "!" + NO_ENDPOINT;
+public class CxfConfig {
+	public static final String NO_CXF = "NO_CXF";
+	protected static final String PROFILE = "!" + NO_CXF;
 
 	@Autowired
 	Hello hello;

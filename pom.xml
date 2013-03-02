@@ -27,7 +27,6 @@
 
 
 	<build>
-		<testSourceDirectory>/src/test/manualTest</testSourceDirectory>
 		<plugins>
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>

@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+
 import org.mortbay.jetty.Connector;
 import org.mortbay.jetty.Server;
 import org.mortbay.jetty.nio.SelectChannelConnector;
@@ -20,8 +21,8 @@ public class Start {
 	public static void main(String[] args) throws Exception {
 		System.err.println(new File(path).getAbsolutePath());
 
-//		System.setProperty("spring.profiles.active", "DUMMY");
-//		System.setProperty("spring.profiles.active", "STUB");
+		// System.setProperty("spring.profiles.active", "DUMMY");
+		// System.setProperty("spring.profiles.active", "STUB");
 
 		server = new Server();
 		SelectChannelConnector connector = new SelectChannelConnector();

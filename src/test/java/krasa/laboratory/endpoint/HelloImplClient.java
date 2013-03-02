@@ -4,9 +4,13 @@ import laboratory.spring.krasa.Echo;
 import laboratory.spring.krasa.EchoResponse;
 import laboratory.spring.krasa.Hello;
 import laboratory.spring.krasa.Hello_Service;
+
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
+@Ignore
+// manual test
 public class HelloImplClient {
 	@Test
 	public void testEcho() throws Exception {
