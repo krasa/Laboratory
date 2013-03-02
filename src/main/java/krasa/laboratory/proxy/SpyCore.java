@@ -1,14 +1,19 @@
 package krasa.laboratory.proxy;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mockito.cglib.proxy.Callback;
 import org.mockito.cglib.proxy.Factory;
 
 public class SpyCore {
 	private final SpyFactory spyFactory = new SpyFactory();
+	private List<SpyContext> activeContexts = new ArrayList<SpyContext>();
 
 	public <T> T createSpy(T object) {
 		SpyContext spyContext = new SpyContext();
 		T spy = spyFactory.createSpy(object, spyContext);
+		activeContexts.add(spyContext);
 		return spy;
 	}
 
@@ -18,7 +23,19 @@ public class SpyCore {
 		if (verify.isFailed()) {
 			throw new VerifyException(verify.getResultAsString(), verify);
 		}
+	}
 
+	public void clear() {
+		activeContexts.clear();
+	}
+
+	public void verifyAllGettersCalled() {
+		for (SpyContext activeContext : activeContexts) {
+			VerifyResult verify = new GettersVerifier().verify(activeContext.getFilter());
+			if (verify.isFailed()) {
+				throw new VerifyException(verify.getResultAsString(), verify);
+			}
+		}
 	}
 
 	public LoggingInvocationHandler getHandler(final Object mock) {
