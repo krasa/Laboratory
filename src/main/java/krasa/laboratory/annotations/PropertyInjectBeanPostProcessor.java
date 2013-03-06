@@ -1,5 +1,6 @@
 package krasa.laboratory.annotations;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
@@ -28,22 +29,31 @@ public class PropertyInjectBeanPostProcessor extends InstantiationAwareBeanPostP
 	private void findPropertyAutowiringMetadata(final Object bean) {
 		ReflectionUtils.doWithFields(bean.getClass(), new ReflectionUtils.FieldCallback() {
 			public void doWith(Field field) throws IllegalArgumentException, IllegalAccessException {
-				PropertyValue annotation = field.getAnnotation(PropertyValue.class);
+				Annotation annotation = field.getAnnotation(getAnnotationClass());
 				if (annotation != null) {
 					if (Modifier.isStatic(field.getModifiers())) {
-						throw new IllegalStateException(
-								"PropertyAutowired annotation is not supported on static fields");
+						throw new IllegalStateException(getAnnotationClass().getName()
+								+ " annotation is not supported on static fields");
 					}
 
-					Object strValue = environment.getProperty(annotation.value().getPropertyName());
+					String stringValue = getPropertyValue(annotation);
 
-					if (strValue != null) {
-						Object value = typeConverter.convertIfNecessary(strValue, field.getType());
+					if (stringValue != null) {
+						Object value = typeConverter.convertIfNecessary(stringValue, field.getType());
 						ReflectionUtils.makeAccessible(field);
 						field.set(bean, value);
 					}
 				}
 			}
 		});
+	}
+
+	protected String getPropertyValue(Annotation annotation) {
+		String propertyName = ((PropertyValue) annotation).value().getPropertyName();
+		return environment.getRequiredProperty(propertyName);
+	}
+
+	protected Class<PropertyValue> getAnnotationClass() {
+		return PropertyValue.class;
 	}
 }
