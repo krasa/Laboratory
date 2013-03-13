@@ -52,6 +52,6 @@ public class PropertiesByActiveProfileLoader implements BeanFactoryPostProcessor
 
 	@Override
 	public int getOrder() {
-		return 0;
+		return -1;
 	}
 }

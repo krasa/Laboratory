@@ -21,7 +21,7 @@ public class Start {
 	public static void main(String[] args) throws Exception {
 		System.err.println(new File(path).getAbsolutePath());
 
-		// System.setProperty("spring.profiles.active", "DUMMY");
+		System.setProperty("spring.profiles.active", "DEV");
 		// System.setProperty("spring.profiles.active", "STUB");
 
 		server = new Server();
