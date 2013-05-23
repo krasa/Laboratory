@@ -25,7 +25,8 @@ public class BeanGenerator2 implements BeanFactoryPostProcessor, PriorityOrdered
 
 	@Override
 	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-		String[] split = environment.getProperty("beanInstances").split(",");
+		String beanInstances = environment.getRequiredProperty("beanInstances");
+		String[] split = beanInstances.split(",");
 		for (String key : split) {
 			generateBean(beanFactory, key);
 		}
