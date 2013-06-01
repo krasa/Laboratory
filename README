@@ -1,8 +1,8 @@
 Contains following tools:
-- Proxy for verifying that all getters/setters were called - krasa.laboratory.proxy.SpyCore
+- Proxy for verifying that all getters/setters were called - krasa.laboratory.commons.proxy.SpyCore
 
-- CXF WS Endpoint configuration via JavaConfig only, no xml. - krasa.laboratory.config.EndpointConfig
+- CXF WS Endpoint configuration via JavaConfig only, no xml. - krasa.laboratory.server.config.CxfConfig
 
-- custom @Autowired/@Value annotation - krasa.laboratory.config.AnnotationResolverConfig
+- custom @Autowired/@Value annotation - krasa.laboratory.server.config.AnnotationResolverConfig
 
-- programmatic properties loader, in this case by an active profile - krasa.laboratory.properties.PropertiesLoader
+- programmatic properties loader, in this case by an active profile - krasa.laboratory.commons.properties.PropertiesByActiveProfileLoader

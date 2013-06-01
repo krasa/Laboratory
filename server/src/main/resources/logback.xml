@@ -1,0 +1,26 @@
+<configuration scan="info" scanPeriod="60 seconds" debug="true">
+
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss} | %level | %-4thread | %-21logger | %m%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<root level="info">
+		<appender-ref ref="STDOUT"/>
+	</root>
+
+	<logger name="krasa.laboratory.server.endpoint.krasa" level="debug"/>
+
+	<logger name="org.springframework" level="info"/>
+	<logger name="org.apache.http" level="debug"/>
+
+	<logger name="org.mortbay.jetty" level="warn"/>
+	<logger name="org.mortbay.jetty.log" level="warn"/>
+	<logger name="org.mortbay.log" level="info"/>
+	<logger name="org.apache.cxf" level="info"/>
+
+
+</configuration>
