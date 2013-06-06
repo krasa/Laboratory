@@ -14,7 +14,7 @@
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>krasa.laboratory.server.endpointconfig.MainWebAppConfig</param-value>
+		<param-value>krasa.laboratory.server.config.MainWebAppConfig</param-value>
 	</context-param>
 
 	<listener>
@@ -36,12 +36,12 @@
 	</servlet-mapping>
 
 	<!-- Filter to force the use of UTF-8 encoding in requests -->
-	<filter>
-		<filter-name>someFilter</filter-name>
-		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>someFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+	<!--<filter>-->
+	<!--<filter-name>someFilter</filter-name>-->
+	<!--<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>-->
+	<!--</filter>-->
+	<!--<filter-mapping>-->
+	<!--<filter-name>someFilter</filter-name>-->
+	<!--<url-pattern>/*</url-pattern>-->
+	<!--</filter-mapping>-->
 </web-app>

@@ -1,10 +1,9 @@
 package krasa.laboratory.server.config;
 
-import laboratory.spring.krasa.hello.Hello;
+import krasa.laboratory.server.endpoint.HelloEndpoint;
 
 import org.apache.cxf.Bus;
 import org.apache.cxf.bus.spring.SpringBusFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -15,17 +14,24 @@ public class CxfConfig {
 	public static final String NO_CXF = "NO_CXF";
 	protected static final String PROFILE = "!" + NO_CXF;
 
-	@Autowired
-	Hello hello;
-
 	@Bean
 	public static Bus cxf() {
 		return SpringBusFactory.getDefaultBus();
 	}
 
 	@Bean
+	public HelloEndpoint helloEndpoint() {
+		return new HelloEndpoint();
+	}
+
+	@Bean
+	public HelloEndpoint helloEndpoint2() {
+		return new HelloEndpoint();
+	}
+
+	@Bean
 	public org.apache.cxf.jaxws.EndpointImpl endpoint() {
-		javax.xml.ws.Endpoint jaxwsEndpoint = javax.xml.ws.Endpoint.publish("/hello", hello);
+		javax.xml.ws.Endpoint jaxwsEndpoint = javax.xml.ws.Endpoint.publish("/hello", helloEndpoint());
 		org.apache.cxf.jaxws.EndpointImpl jaxwsEndpointImpl = (org.apache.cxf.jaxws.EndpointImpl) jaxwsEndpoint;
 		org.apache.cxf.endpoint.Server server = jaxwsEndpointImpl.getServer();
 		org.apache.cxf.endpoint.Endpoint cxfEndpoint = server.getEndpoint();
@@ -37,7 +43,7 @@ public class CxfConfig {
 
 	@Bean
 	public org.apache.cxf.jaxws.EndpointImpl endpoint2() {
-		javax.xml.ws.Endpoint jaxwsEndpoint = javax.xml.ws.Endpoint.publish("/hi", hello);
+		javax.xml.ws.Endpoint jaxwsEndpoint = javax.xml.ws.Endpoint.publish("/hello2", helloEndpoint2());
 		org.apache.cxf.jaxws.EndpointImpl jaxwsEndpointImpl = (org.apache.cxf.jaxws.EndpointImpl) jaxwsEndpoint;
 		org.apache.cxf.endpoint.Server server = jaxwsEndpointImpl.getServer();
 		org.apache.cxf.endpoint.Endpoint cxfEndpoint = server.getEndpoint();
