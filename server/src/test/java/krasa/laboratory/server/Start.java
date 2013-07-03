@@ -17,7 +17,7 @@ public class Start {
 		System.err.println(new File(path).getAbsolutePath());
 
 		System.setProperty("spring.profiles.active", "DEV");
-		// System.setProperty("spring.profiles.active", "STUB");--
+		// System.setProperty("spring.profiles.active", "STUB");
 
 		server = new Server();
 		SelectChannelConnector connector = new SelectChannelConnector();
