@@ -1,11 +1,11 @@
 package krasa.laboratory.server;
 
-import java.io.File;
-
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.nio.SelectChannelConnector;
 import org.eclipse.jetty.webapp.WebAppContext;
+
+import java.io.File;
 
 public class Start {
 
@@ -17,7 +17,7 @@ public class Start {
 		System.err.println(new File(path).getAbsolutePath());
 
 		System.setProperty("spring.profiles.active", "DEV");
-		// System.setProperty("spring.profiles.active", "STUB");
+		// System.setProperty("spring.profiles.active", "STUB");--
 
 		server = new Server();
 		SelectChannelConnector connector = new SelectChannelConnector();
