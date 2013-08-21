@@ -15,32 +15,41 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.PoolingClientConnectionManager;
 import org.junit.Assert;
 import org.junit.Test;
-import org.springframework.context.annotation.Bean;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.ws.client.core.WebServiceTemplate;
 import org.springframework.ws.transport.http.HttpComponentsMessageSender;
 
-//@Ignore
-// manual test
 public class HelloClientSpring {
 
+	public static final String URL_1 = "http://prgen15.tmdev/hello";
+	public static final String URL_2 = "http://prgen15.tmdev/hello1";
+	public static final String URL_3 = "http://prgen15.tmdev/hello2";
+	public static final String URL_4 = "http://prgen15.tmdev/hello3";
 	protected WebServiceTemplate webServiceTemplate = getWebServiceTemplate();
+	protected WebServiceTemplate webServiceTemplate2 = getWebServiceTemplate();
 	AtomicInteger atomicInteger = new AtomicInteger();
 
 	@Test
 	public void testEchoConcurrent() throws Exception {
 		ArrayList<Callable<Object>> callables = new ArrayList<Callable<Object>>();
-		callables.add(ExecutorUtil.getTask(getRunnable("http://localhost:80/foo")));
-		callables.add(ExecutorUtil.getTask(getRunnable("http://localhost:80/foo")));
-		callables.add(ExecutorUtil.getTask(getRunnable("http://localhost:80/foo")));
-		callables.add(ExecutorUtil.getTask(getRunnable("http://localhost:80/foo")));
-		callables.add(ExecutorUtil.getTask(getRunnable("http://localhost:80/foo")));
-		callables.add(ExecutorUtil.getTask(getRunnable("http://localhost:80/bar")));
-		callables.add(ExecutorUtil.getTask(getRunnable("http://localhost:80/bar")));
-		callables.add(ExecutorUtil.getTask(getRunnable("http://localhost:80/bar")));
-		callables.add(ExecutorUtil.getTask(getRunnable("http://localhost:80/bar")));
-		callables.add(ExecutorUtil.getTask(getRunnable("http://localhost:80/bar")));
-		callables.add(ExecutorUtil.getTask(getRunnable("http://localhost:80/bar")));
+		boolean one = true;
+		boolean two = true;
+		if (one) {
+			for (int i = 0; i < 80; i++) {
+				callables.add(ExecutorUtil.getTask(getRunnable(URL_1, HelloClientSpring.this.webServiceTemplate)));
+			}
+		}
+		if (two) {
+			for (int i = 0; i < 80; i++) {
+				callables.add(ExecutorUtil.getTask(getRunnable(URL_2, HelloClientSpring.this.webServiceTemplate2)));
+			}
+			// for (int i = 0; i < 200; i++) {
+			// callables.add(ExecutorUtil.getTask(getRunnable(URL_3, HelloClientSpring.this.webServiceTemplate2)));
+			// }
+			// for (int i = 0; i < 200; i++) {
+			// callables.add(ExecutorUtil.getTask(getRunnable(URL_4, HelloClientSpring.this.webServiceTemplate2)));
+			// }
+		}
 
 		long start = System.currentTimeMillis();
 		ExecutorUtil.<Object> exec(callables);
@@ -52,33 +61,33 @@ public class HelloClientSpring {
 	public void testEcho() throws Exception {
 		final Echo requestPayload = new Echo();
 		requestPayload.setMessage("foo");
-		final EchoResponse o = sendEcho(requestPayload, "http://localhost:8080/hello");
+		final EchoResponse o = sendEcho(requestPayload, "http://localhost:8080/hello", webServiceTemplate);
 		Assert.assertNotNull(o);
 	}
 
 	static AtomicInteger concurrentConnections = new AtomicInteger();
 
-	private Runnable getRunnable(final String uri) {
+	private Runnable getRunnable(final String uri, final WebServiceTemplate webServiceTemplate1) {
 		return new Runnable() {
 			@Override
 			public void run() {
 				try {
 					try {
 						final int i = atomicInteger.incrementAndGet();
-						int i1 = concurrentConnections.incrementAndGet();
-						if (i > 100) {
-							return;
-						}
+						// Thread.sleep(Long.parseLong(RandomStringUtils.randomNumeric(1)));
 						final Echo requestPayload = new Echo();
 						requestPayload.setMessage(String.valueOf(i));
-						System.err.println("start " + uri + " connection " + i1);
-						final EchoResponse o = sendEcho(requestPayload, uri);
+						// System.err.println("start " + uri + " connection " +
+						// concurrentConnections.incrementAndGet());
+						long start = System.currentTimeMillis();
+						final EchoResponse o = sendEcho(requestPayload, uri, webServiceTemplate1);
+						long end = System.currentTimeMillis();
+
+						System.err.println(end - start + " received " + uri + " connection "
+								+ concurrentConnections.decrementAndGet());
 						Assert.assertNotNull(o);
 						Assert.assertEquals(requestPayload.getMessage(), o.getOriginalMessage());
-						System.err.println("ok " + i);
 					} finally {
-						int i2 = concurrentConnections.decrementAndGet();
-						System.err.println("ok " + uri + " connection " + i2);
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -88,8 +97,8 @@ public class HelloClientSpring {
 		};
 	}
 
-	private EchoResponse sendEcho(Echo requestPayload, String uri) {
-		return (EchoResponse) webServiceTemplate.marshalSendAndReceive(uri, requestPayload,
+	private EchoResponse sendEcho(Echo requestPayload, String uri, WebServiceTemplate webServiceTemplate1) {
+		return (EchoResponse) webServiceTemplate1.marshalSendAndReceive(uri, requestPayload,
 				new XmlDeclarationEnabledCallback());
 	}
 
@@ -101,7 +110,6 @@ public class HelloClientSpring {
 		return webServiceTemplate;
 	}
 
-	@Bean
 	public Jaxb2Marshaller getMarshaller() {
 		Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
 		jaxb2Marshaller.setContextPaths(EchoResponse.class.getPackage().getName());
@@ -128,8 +136,8 @@ public class HelloClientSpring {
 
 	private PoolingClientConnectionManager newConnectionManager() {
 		PoolingClientConnectionManager threadSafeClientConnManager = new PoolingClientConnectionManager();
-		threadSafeClientConnManager.setDefaultMaxPerRoute(50);
-		threadSafeClientConnManager.setMaxTotal(50);
+		threadSafeClientConnManager.setDefaultMaxPerRoute(200);
+		threadSafeClientConnManager.setMaxTotal(200);
 		return threadSafeClientConnManager;
 	}
 

@@ -6,18 +6,18 @@ import laboratory.spring.krasa.hello.Hello;
 import laboratory.spring.krasa.hello.Hello_Service;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
-@Ignore
-// manual test
 public class HelloCxfClient {
 
 	@Test
 	public void testEchoWithCxfClient() throws Exception {
-		Hello_Service service = new Hello_Service();
-		Hello client = service.getHelloSOAP();
+		Hello client = new Hello_Service().getHelloSOAP();
 
+		send(client);
+	}
+
+	private void send(Hello client) {
 		Echo parameters = new Echo();
 		parameters.setMessage("hi");
 		EchoResponse echo = client.echo(parameters);

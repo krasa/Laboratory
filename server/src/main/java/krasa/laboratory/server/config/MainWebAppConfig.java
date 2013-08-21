@@ -11,7 +11,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.jmx.export.annotation.AnnotationMBeanExporter;
 
 @Configuration
-@ComponentScan("krasa.laboratory")
+@ComponentScan("krasa.laboratory.server")
 @ImportResource("classpath:spring-server.xml")
 public class MainWebAppConfig {
 	@Autowired

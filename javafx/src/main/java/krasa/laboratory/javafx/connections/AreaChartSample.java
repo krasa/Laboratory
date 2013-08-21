@@ -18,6 +18,7 @@ import javax.management.ObjectInstance;
 import krasa.laboratory.javafx.connections.jmx.JmxConnector;
 import krasa.laboratory.javafx.connections.jmx.SpringJmxClientBean;
 import krasa.laboratory.javafx.connections.series.HelloEndpointChartSeries;
+import krasa.laboratory.javafx.connections.series.HelloRestEndpointChartSeries;
 import krasa.laboratory.javafx.connections.series.NumberSeries;
 import krasa.laboratory.javafx.connections.series.SeriesUpdateJob;
 
@@ -66,14 +67,36 @@ public class AreaChartSample extends Application {
 
 		primaryStage.setScene(new Scene(chart, 800, 400));
 
-		discoverJmx(springJmxClientBean);
+		// discoverWsJmx(springJmxClientBean);
+		discoverRestJmx();
 	}
 
-	private void discoverJmx(final SpringJmxClientBean jmxClientBean) throws Exception {
+	private void discoverWsJmx(final SpringJmxClientBean jmxClientBean) throws Exception {
 		final List<ObjectInstance> endpoints = jmxClientBean.getEndpoints();
 		for (ObjectInstance endpoint : endpoints) {
 			createSerie(chart, endpoint);
 		}
+	}
+
+	public void discoverRestJmx() throws Exception {
+		connectJmx();
+		final List<ObjectInstance> endpoints = springJmxClientBean.getRestEndpoints();
+		for (ObjectInstance endpoint : endpoints) {
+			createRestSerie(chart, endpoint, "1");
+			createRestSerie(chart, endpoint, "2");
+			createRestSerie(chart, endpoint, "3");
+			createRestSerie(chart, endpoint, "4");
+			createRestSerie(chart, endpoint, "5");
+			createRestSerie(chart, endpoint, "6");
+			createRestSerie(chart, endpoint, "7");
+		}
+	}
+
+	private void createRestSerie(LineChart<Number, Number> chart, ObjectInstance endpoint, String hi1) {
+		final HelloRestEndpointChartSeries numberSerie1 = new HelloRestEndpointChartSeries(endpoint,
+				springJmxClientBean, hi1);
+		numberSerie1.addToChart(chart);
+		numberSeries.add(numberSerie1);
 	}
 
 	private void createDummySerie(LineChart<Number, Number> chart) {
@@ -90,13 +113,16 @@ public class AreaChartSample extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		this.springJmxClientBean = new JmxConnector().springJmxClientBean("localhost:1099");
 		init(primaryStage);
 		primaryStage.show();
 		createSchedulerExecutor();
 		executor.scheduleAtFixedRate(new SeriesUpdateJob(this), 0, 1000, TimeUnit.MILLISECONDS);
 		// -- Prepare Timeline
 		prepareTimeline();
+	}
+
+	private void connectJmx() throws Exception {
+		this.springJmxClientBean = new JmxConnector().springJmxClientBean("localhost:1199");
 	}
 
 	private void createSchedulerExecutor() {
@@ -139,5 +165,15 @@ public class AreaChartSample extends Application {
 
 	public List<NumberSeries> getNumberSeries() {
 		return numberSeries;
+	}
+
+	public void reconnectJmx() throws Exception {
+		connectJmx();
+		for (NumberSeries numberSery : numberSeries) {
+			if (numberSery instanceof HelloRestEndpointChartSeries) {
+				((HelloRestEndpointChartSeries) numberSery).setSpringJmxClientBean(springJmxClientBean);
+			}
+		}
+
 	}
 }

@@ -16,10 +16,12 @@
 		<module>client</module>
 		<module>commons</module>
 		<module>javafx</module>
+		<module>utils</module>
 	</modules>
 
 
 	<properties>
+		<trove4j.version>3.0.3</trove4j.version>
 		<laboratory.version>1.0-SNAPSHOT</laboratory.version>
 		<maven.build.helper.version>1.7</maven.build.helper.version>
 		<maven.surefire.version>2.13</maven.surefire.version>
@@ -39,6 +41,9 @@
 		<mockito-core.version>1.9.5</mockito-core.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<httpclient.version>4.2.5</httpclient.version>
+		<javax.ws.rs.version>2.0-m15</javax.ws.rs.version>
+		<tomcat.embed.version>7.0.40</tomcat.embed.version>
+		<commons.io.version>2.4</commons.io.version>
 	</properties>
 
 

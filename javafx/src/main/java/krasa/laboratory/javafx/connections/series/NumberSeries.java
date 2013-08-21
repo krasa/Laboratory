@@ -26,6 +26,10 @@ public class NumberSeries {
 		chart.getData().add(getSerie());
 	}
 
+	public void removeFromChart() {
+		getSerie().getChart().getData().remove(getSerie());
+	}
+
 	public int updateSerie() {
 		int lastIndex = -1;
 		for (int i = 0; i < 20; i++) { // -- add 20 numbers to the plot+

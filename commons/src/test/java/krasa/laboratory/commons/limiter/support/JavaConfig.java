@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @Configuration
-@ComponentScan(basePackages = "krasa.laboratory.server.endpoint.krasa")
+@ComponentScan(basePackages = "krasa.laboratory.commons.limiter.support")
 @EnableAspectJAutoProxy
 public class JavaConfig {
 

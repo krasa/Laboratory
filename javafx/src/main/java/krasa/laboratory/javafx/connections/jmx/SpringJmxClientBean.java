@@ -63,7 +63,7 @@ public class SpringJmxClientBean {
 		}
 	}
 
-	private Integer getInteger(ObjectName objectName, String operationName) throws InstanceNotFoundException,
+	public Integer getInteger(ObjectName objectName, String operationName) throws InstanceNotFoundException,
 			MBeanException, ReflectionException, IOException {
 		return (Integer) mbsc.invoke(objectName, operationName, null, // no parameter
 				null);
@@ -102,6 +102,19 @@ public class SpringJmxClientBean {
 		final Set<ObjectInstance> objectInstances = mbsc.queryMBeans(null, null);
 		for (ObjectInstance objectInstance : objectInstances) {
 			if (objectInstance.getClassName().equals("krasa.laboratory.server.endpoint.HelloEndpoint")) {
+				list.add(objectInstance);
+			}
+		}
+
+		return list;
+	}
+
+	public List<ObjectInstance> getRestEndpoints() throws ReflectionException, MBeanException,
+			InstanceNotFoundException, IOException, MalformedObjectNameException {
+		final List<ObjectInstance> list = new ArrayList<ObjectInstance>();
+		final Set<ObjectInstance> objectInstances = mbsc.queryMBeans(null, null);
+		for (ObjectInstance objectInstance : objectInstances) {
+			if (objectInstance.getClassName().equals("krasa.laboratory.server.endpoint.RestEndpoint")) {
 				list.add(objectInstance);
 			}
 		}

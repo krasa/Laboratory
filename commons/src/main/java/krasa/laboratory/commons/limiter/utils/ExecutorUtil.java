@@ -46,14 +46,9 @@ public abstract class ExecutorUtil {
 			public Object call() throws Exception {
 				String name = Thread.currentThread().getName();
 				int i = 0;
-				while (i < 5) {
+				while (i < 50000) {
 					i++;
-					if (i == 3) {
-						System.err.println(name + " sleeping");
-						Thread.sleep(1000);
-					}
 					runnable.run();
-					System.err.println(name + " " + System.currentTimeMillis());
 				}
 				return null;
 			}

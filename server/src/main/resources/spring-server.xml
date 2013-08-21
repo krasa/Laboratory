@@ -6,12 +6,12 @@
 
 	<bean id="registry"
 		  class="org.springframework.remoting.rmi.RmiRegistryFactoryBean"
-		  p:port="1099"/>
+		  p:port="1199"/>
 
 	<bean id="serverConnector"
 		  class="org.springframework.jmx.support.ConnectorServerFactoryBean"
 		  depends-on="registry"
 		  p:objectName="connector:name=rmi"
-		  p:serviceUrl="service:jmx:rmi://localhost/jndi/rmi://localhost:1099/jmxrmi"/>
+		  p:serviceUrl="service:jmx:rmi://localhost/jndi/rmi://localhost:1199/jmxrmi"/>
 
 </beans>  

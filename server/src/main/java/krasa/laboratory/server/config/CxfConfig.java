@@ -1,9 +1,14 @@
 package krasa.laboratory.server.config;
 
 import krasa.laboratory.server.endpoint.HelloEndpoint;
+import krasa.laboratory.server.endpoint.RestEndpoint;
 
 import org.apache.cxf.Bus;
 import org.apache.cxf.bus.spring.SpringBusFactory;
+import org.apache.cxf.endpoint.Server;
+import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
+import org.apache.cxf.jaxrs.lifecycle.SingletonResourceProvider;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -13,6 +18,8 @@ import org.springframework.context.annotation.Profile;
 public class CxfConfig {
 	public static final String NO_CXF = "NO_CXF";
 	protected static final String PROFILE = "!" + NO_CXF;
+	@Autowired
+	RestEndpoint restEndpoint;
 
 	@Bean
 	public static Bus cxf() {
@@ -39,6 +46,15 @@ public class CxfConfig {
 		org.apache.cxf.service.Service cxfService = cxfEndpoint.getService();
 		// cxfService.getOutInterceptors().add(...);
 		return jaxwsEndpointImpl;
+	}
+
+	@Bean
+	public Server jaxrsServerFactoryBean() {
+		JAXRSServerFactoryBean sf = new JAXRSServerFactoryBean();
+		sf.setAddress("/rest");
+		sf.setResourceClasses(RestEndpoint.class);
+		sf.setResourceProvider(new SingletonResourceProvider(restEndpoint));
+		return sf.create();
 	}
 
 	@Bean

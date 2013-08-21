@@ -21,8 +21,13 @@ public class SeriesUpdateJob implements Runnable {
 			NumberSeries numberSeries = iterator.next();
 			try {
 				numberSeries.update(xAxisIndex);
+			} catch (java.rmi.ConnectException e) {
+				try {
+					areaChartSample.reconnectJmx();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 			} catch (Exception e) {
-				iterator.remove();
 				e.printStackTrace();
 			}
 		}

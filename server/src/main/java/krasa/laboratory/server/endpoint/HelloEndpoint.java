@@ -12,6 +12,7 @@ import laboratory.spring.krasa.hello.Echo;
 import laboratory.spring.krasa.hello.EchoResponse;
 import laboratory.spring.krasa.hello.Hello;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,7 @@ public class HelloEndpoint implements Hello {
 	List<Parent> parents;
 	@Autowired
 	List<AppContextExtendingBean> appContextExtendingBeans;
+
 	@Autowired
 	ApplicationContext applicationContext;
 
@@ -49,7 +51,7 @@ public class HelloEndpoint implements Hello {
 
 		echoResponse.setOriginalMessage(parameters.getMessage());
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(Long.parseLong(RandomStringUtils.randomNumeric(4)));
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
