@@ -6,6 +6,7 @@ import krasa.laboratory.javafx.connections.AreaChartSample;
 import krasa.laboratory.javafx.connections.AreaChartSample;
 import krasa.laboratory.javafx.connections.AreaChartSample;
 import krasa.laboratory.javafx.connections.AreaChartSample;
+import krasa.laboratory.javafx.connections.AreaChartSample;
 
 /**
  * @author Vojtech Krasa
