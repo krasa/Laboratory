@@ -1,12 +1,8 @@
 package krasa.laboratory.javafx.connections.series;
 
-import java.util.Iterator;
+import krasa.laboratory.javafx.connections.AreaChartSample;
 
-import krasa.laboratory.javafx.connections.AreaChartSample;
-import krasa.laboratory.javafx.connections.AreaChartSample;
-import krasa.laboratory.javafx.connections.AreaChartSample;
-import krasa.laboratory.javafx.connections.AreaChartSample;
-import krasa.laboratory.javafx.connections.AreaChartSample;
+import java.util.Iterator;
 
 /**
  * @author Vojtech Krasa
