@@ -9,28 +9,29 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>javafx</artifactId>
+    <artifactId>commons-test</artifactId>
+
 
     <dependencies>
         <dependency>
-            <groupId>com.github.krasa.laboratory</groupId>
-            <artifactId>commons</artifactId>
-            <version>${laboratory.version}</version>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.github.krasa.laboratory</groupId>
-            <artifactId>commons-test</artifactId>
-            <version>${laboratory.version}</version>
-            <scope>test</scope>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>javafx</artifactId>
-            <version>1</version>
-            <scope>system</scope>
-            <systemPath>${env.JAVA_HOME}/jre/lib/jfxrt.jar</systemPath>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymock</artifactId>
+            <version>${easymock.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito-core.version}</version>
         </dependency>
     </dependencies>
-
-
 </project>
