@@ -11,12 +11,23 @@
 
     <artifactId>commons</artifactId>
 
+    <properties>
+        <commons-lang3.version>3.1</commons-lang3.version>
+        <commons-beanutils.version>1.9.2</commons-beanutils.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.github.krasa.laboratory</groupId>
             <artifactId>commons-test</artifactId>
             <version>${laboratory.version}</version>
             <scope>test</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>${commons-beanutils.version}</version>
         </dependency>
 
         <dependency>
@@ -139,6 +150,10 @@
                     <artifactId>spring-aop</artifactId>
                     <groupId>org.springframework</groupId>
                 </exclusion>
+                <exclusion>
+                    <artifactId>spring-context</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
@@ -147,8 +162,5 @@
             <version>3.0.1</version>
         </dependency>
     </dependencies>
-    <properties>
-        <commons-lang3.version>3.1</commons-lang3.version>
-    </properties>
 
 </project>

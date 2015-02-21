@@ -3,8 +3,8 @@ package krasa.laboratory.commons.ws;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.ws.client.core.WebServiceTemplate;
 
-@Adapter(name = "testAdapter", marshaller = "testAdapterMarshaller")
-public class SmartAdapter {
+
+public abstract class SmartAdapter {
 
     WebServiceTemplate webServiceTemplate;
     String externalSystem;

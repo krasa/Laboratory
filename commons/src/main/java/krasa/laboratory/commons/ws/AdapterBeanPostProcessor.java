@@ -10,11 +10,12 @@ import org.springframework.beans.factory.config.InstantiationAwareBeanPostProces
 import org.springframework.core.PriorityOrdered;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.env.Environment;
-import org.springframework.stereotype.Component;
 
 import java.beans.PropertyDescriptor;
 
-@Component
+/**
+ * useless for javaconfig @Bean annotated methods
+ */
 public class AdapterBeanPostProcessor extends InstantiationAwareBeanPostProcessorAdapter implements PriorityOrdered {
 
     private static final Logger log = LoggerFactory.getLogger(AdapterBeanPostProcessor.class);
@@ -31,6 +32,7 @@ public class AdapterBeanPostProcessor extends InstantiationAwareBeanPostProcesso
             log.info("postProcessBeforeInitialization adapter.key={}", adapter.name());
             MutablePropertyValues mutablePropertyValues = (MutablePropertyValues) pvs;
             mutablePropertyValues.addPropertyValue("externalSystem", adapter.name());
+
         }
         return pvs;
     }
