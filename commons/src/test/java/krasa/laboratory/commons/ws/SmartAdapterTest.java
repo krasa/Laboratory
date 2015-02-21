@@ -23,14 +23,14 @@ import java.lang.management.ManagementFactory;
 public class SmartAdapterTest {
     private static final Logger log = LoggerFactory.getLogger(SmartAdapterTest.class);
     @Autowired
-    TestSmartAdapter smartAdapter;
+    ClassAnnotatedSmartAdapter classAnnotatedSmartAdapter;
     @Autowired
     @Qualifier("javaConfigSmartAdapter")
     SmartAdapter javaConfigSmartAdapter;
 
     @Test
     public void testName() throws Exception {
-        notNull(smartAdapter);
+        notNull(classAnnotatedSmartAdapter);
         notNull(javaConfigSmartAdapter);
         log.info("uptime:" + ManagementFactory.getRuntimeMXBean().getUptime());
     }
