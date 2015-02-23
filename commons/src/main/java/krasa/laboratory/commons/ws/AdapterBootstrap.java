@@ -19,15 +19,7 @@ public class AdapterBootstrap extends AnnotatedBeanFactoryPostProcessor<Adapter>
 		return Adapter.class;
 	}
 
-	protected void processClass(DefaultListableBeanFactory beanFactory, String beanName, Adapter annotationOnBean) {
-		Adapter adapter = annotationOnBean;
-		String adapterKey = adapter.key();
-		String marshaller = adapter.marshaller();
-
-		processAdapter(beanFactory, adapterKey, marshaller, beanFactory.getBeanDefinition(beanName));
-	}
-
-	protected void processJavaConfigBean(DefaultListableBeanFactory beanFactory, String beanName,
+	protected void processBean(DefaultListableBeanFactory beanFactory, String beanName,
 			Map<String, Object> annotationAttributes) {
 		String adapterKey = (String) annotationAttributes.get("key");
 		String marshaller = (String) annotationAttributes.get("marshaller");

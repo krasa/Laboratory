@@ -14,6 +14,7 @@ import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.EnvironmentAware;
+import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.env.Environment;
 import org.springframework.core.type.MethodMetadata;
 import org.springframework.util.Assert;
@@ -38,7 +39,7 @@ public abstract class AnnotatedBeanFactoryPostProcessor<T extends Annotation> im
 		String[] beanNamesForAnnotation = beanFactory.getBeanNamesForAnnotation(getAnnotationType());
 		for (String beanName : beanNamesForAnnotation) {
 			T annotationOnBean = beanFactory.findAnnotationOnBean(beanName, getAnnotationType());
-			processClass(beanFactory, beanName, annotationOnBean);
+			processBean(beanFactory, beanName, AnnotationUtils.getAnnotationAttributes(annotationOnBean));
 		}
 	}
 
@@ -50,16 +51,14 @@ public abstract class AnnotatedBeanFactoryPostProcessor<T extends Annotation> im
 				if (factoryMethodMetadata != null) {
 					Map<String, Object> annotationAttributes = factoryMethodMetadata.getAnnotationAttributes(getAnnotationType().getName());
 					if (annotationAttributes != null) {
-						processJavaConfigBean(beanFactory, beanName, annotationAttributes);
+						processBean(beanFactory, beanName, annotationAttributes);
 					}
 				}
 			}
 		}
 	}
 
-	protected abstract void processClass(DefaultListableBeanFactory beanFactory, String beanName, T annotationOnBean);
-
-	protected abstract void processJavaConfigBean(DefaultListableBeanFactory beanFactory, String beanName,
+	protected abstract void processBean(DefaultListableBeanFactory beanFactory, String beanName,
 			Map<String, Object> annotationAttributes);
 
 	protected RuntimeBeanReference register(DefaultListableBeanFactory beanFactory, final String beanName,
