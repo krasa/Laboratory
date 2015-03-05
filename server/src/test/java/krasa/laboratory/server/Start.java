@@ -1,11 +1,11 @@
 package krasa.laboratory.server;
 
+import java.io.File;
+
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.nio.SelectChannelConnector;
 import org.eclipse.jetty.webapp.WebAppContext;
-
-import java.io.File;
 
 public class Start {
 
@@ -21,7 +21,7 @@ public class Start {
 
 		server = new Server();
 		SelectChannelConnector connector = new SelectChannelConnector();
-		connector.setPort(8080);
+		connector.setPort(8081);
 		server.setConnectors(new Connector[] { connector });
 		WebAppContext context = new WebAppContext();
 		context.setServer(server);

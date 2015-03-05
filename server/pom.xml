@@ -22,7 +22,6 @@
         </plugins>
     </build>
     <dependencies>
-
         <dependency>
             <groupId>com.github.krasa.laboratory</groupId>
             <artifactId>commons</artifactId>

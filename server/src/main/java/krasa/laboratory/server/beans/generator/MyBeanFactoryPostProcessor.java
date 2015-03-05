@@ -19,8 +19,8 @@ import org.springframework.core.PriorityOrdered;
 import org.springframework.core.env.Environment;
 
 /*generates beans according to loaded properties*/
-public class BeanGenerator2 implements BeanFactoryPostProcessor, PriorityOrdered, EnvironmentAware {
-	public static final Log logger = LogFactory.getLog(BeanGenerator2.class);
+public class MyBeanFactoryPostProcessor implements BeanFactoryPostProcessor, PriorityOrdered, EnvironmentAware {
+	public static final Log logger = LogFactory.getLog(MyBeanFactoryPostProcessor.class);
 	private Environment environment;
 
 	@Override

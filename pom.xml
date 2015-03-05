@@ -18,6 +18,7 @@
         <module>javafx</module>
         <module>utils</module>
         <module>commons-test</module>
+        <module>spring-boot-server</module>
     </modules>
 
 

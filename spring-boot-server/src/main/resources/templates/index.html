@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" th:href="@{blueprint/screen.css}" type="text/css" media="screen, projection"/>
+    <link rel="stylesheet" th:href="@{blueprint/print.css}" type="text/css" media="print"/>
+    <!--[if lt IE 8]>
+    <link rel="stylesheet th:href=" @{"blueprint/ie.css"}" type="text/css" media="screen, projection"><![endif]-->
+
+</head>
+<body>
+<div class="container">
+    <span th:text="'Hello, ' + ${name} + '!'"/>
+
+    <h1>Spring MVC 3.1 Demo Endpoints</h1>
+
+    <div>
+        <div th:each="entry : ${handlerMethods}">
+            <div>
+                <hr/>
+                <p><strong th:text="${entry.value}"></strong></p>
+            </div>
+            <div class="span-3 colborder">
+                <p>
+                    <span class="alt">Patterns:</span><br/>
+                    <span th:each="pattern : ${entry.key.patternsCondition.patterns}">
+                     <a th:href="${pattern}" th:text="${pattern}"></a>  
+                    </span>
+                </p>
+            </div>
+            <div class="span-3 colborder">
+                <p>
+                    <span class="alt">Request Methods:</span><br/>
+                    <span th:text="${entry.key.methodsCondition.methods}"> </span>
+                </p>
+            </div>
+            <div class="span-3 colborder">
+                <p>
+                    <span class="alt">Headers:</span><br/>
+                    <span th:text="${entry.key.headersCondition.expressions}"> </span>
+                </p>
+            </div>
+            <div class="span-3 colborder">
+                <p>
+                    <span class="alt">Parameters:</span><br/>
+                    <span th:text="${entry.key.paramsCondition.expressions}"> </span>
+                </p>
+            </div>
+            <div class="span-3 colborder">
+                <p>
+                    <span class="alt">Consumes:</span><br/>
+                    <span th:text="${entry.key.consumesCondition.expressions}"> </span>
+                </p>
+            </div>
+            <div class="span-3 last">
+                <p>
+                    <span class="alt">Produces:</span><br/>
+                    <span th:text="${entry.key.producesCondition.expressions}"> </span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

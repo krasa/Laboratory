@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.type.AnnotationMetadata;
 
 /*usable for parsing external configuration*/
-public class BeanGenerator implements ImportBeanDefinitionRegistrar {
+public class MyImportBeanDefinitionRegistrar implements ImportBeanDefinitionRegistrar {
 
 	@Override
 	public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
