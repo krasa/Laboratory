@@ -7,6 +7,13 @@
     <groupId>com.github.krasa.laboratory</groupId>
     <artifactId>laboratory-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
+	<dependencies>
+		<dependency>
+			<groupId>org.tuckey</groupId>
+			<artifactId>urlrewritefilter</artifactId>
+			<version>4.0.4</version>
+		</dependency>
+	</dependencies>
 
     <packaging>pom</packaging>
 
@@ -19,7 +26,8 @@
         <module>utils</module>
         <module>commons-test</module>
         <module>spring-boot-server</module>
-    </modules>
+		<module>queue</module>
+	</modules>
 
 
     <properties>
@@ -48,8 +56,25 @@
         <javax.ws.rs.version>2.0-m15</javax.ws.rs.version>
         <tomcat.embed.version>7.0.40</tomcat.embed.version>
         <commons.io.version>2.4</commons.io.version>
+		<commons-lang3.version>3.4</commons-lang3.version>
+		<commons-beanutils.version>1.9.2</commons-beanutils.version>
+		<disruptor.version>3.3.5</disruptor.version>
+		<tape.version>1.2.3</tape.version>
+		<guava.version>18.0</guava.version>
     </properties>
 
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
     <repositories>
         <repository>
