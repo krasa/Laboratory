@@ -2,8 +2,6 @@ package krasa.laboratory.commons.ws;
 
 import java.util.Map;
 
-import krasa.laboratory.commons.bootstrap.AnnotatedBeanFactoryPostProcessor;
-
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
@@ -11,14 +9,18 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.ws.client.core.WebServiceTemplate;
 
+import krasa.laboratory.commons.bootstrap.AnnotatedBeanFactoryPostProcessor;
+
 public class AdapterBootstrap extends AnnotatedBeanFactoryPostProcessor<Adapter> {
 
 	public static final String ADAPTER_KEY = "adapter.key";
 
+	@Override
 	protected Class<Adapter> getAnnotationType() {
 		return Adapter.class;
 	}
 
+	@Override
 	protected void processBean(DefaultListableBeanFactory beanFactory, String beanName,
 			Map<String, Object> annotationAttributes) {
 		String adapterKey = (String) annotationAttributes.get("key");

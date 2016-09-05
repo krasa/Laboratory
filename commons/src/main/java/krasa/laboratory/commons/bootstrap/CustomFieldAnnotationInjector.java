@@ -44,6 +44,7 @@ public abstract class CustomFieldAnnotationInjector<T extends Annotation> extend
 
 	private void processFields(Object bean, final String beanName, final MutablePropertyValues mpvs) {
 		ReflectionUtils.doWithFields(bean.getClass(), new ReflectionUtils.FieldCallback() {
+			@Override
 			public void doWith(Field field) throws IllegalArgumentException, IllegalAccessException {
 				T annotation = field.getAnnotation(getAnnotationClass());
 				if (annotation != null) {

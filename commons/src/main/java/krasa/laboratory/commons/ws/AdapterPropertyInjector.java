@@ -1,9 +1,9 @@
 package krasa.laboratory.commons.ws;
 
-import krasa.laboratory.commons.bootstrap.CustomFieldAnnotationInjector;
-
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.util.Assert;
+
+import krasa.laboratory.commons.bootstrap.CustomFieldAnnotationInjector;
 
 public class AdapterPropertyInjector extends CustomFieldAnnotationInjector<AdapterProperty> {
 	@Override
@@ -19,6 +19,7 @@ public class AdapterPropertyInjector extends CustomFieldAnnotationInjector<Adapt
 		return beanDefinition.getAttribute(AdapterBootstrap.ADAPTER_KEY) != null;
 	}
 
+	@Override
 	protected Class<AdapterProperty> getAnnotationClass() {
 		return AdapterProperty.class;
 	}

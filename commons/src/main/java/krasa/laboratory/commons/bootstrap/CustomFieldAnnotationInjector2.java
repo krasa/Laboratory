@@ -29,8 +29,10 @@ public abstract class CustomFieldAnnotationInjector2<T extends Annotation> exten
 	protected Environment environment;
 	protected ConfigurableListableBeanFactory beanFactory;
 
+	@Override
 	public boolean postProcessAfterInstantiation(final Object bean, final String beanName) throws BeansException {
 		ReflectionUtils.doWithFields(bean.getClass(), new ReflectionUtils.FieldCallback() {
+			@Override
 			public void doWith(Field field) throws IllegalArgumentException, IllegalAccessException {
 				T annotation = field.getAnnotation(getAnnotationClass());
 				if (annotation != null) {
