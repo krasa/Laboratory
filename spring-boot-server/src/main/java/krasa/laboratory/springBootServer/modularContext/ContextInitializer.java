@@ -12,6 +12,7 @@ public class ContextInitializer implements ApplicationListener<ContextRefreshedE
 
 	protected AnnotationConfigApplicationContext childContext;
 
+	@Override
 	public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
 		if (childContext == null) {
 			initializeChildContext(contextRefreshedEvent.getApplicationContext());

@@ -1,8 +1,8 @@
 package krasa.laboratory.javafx.connections.series;
 
-import krasa.laboratory.javafx.connections.AreaChartSample;
-
 import java.util.Iterator;
+
+import krasa.laboratory.javafx.connections.AreaChartSample;
 
 /**
  * @author Vojtech Krasa
@@ -15,6 +15,7 @@ public class SeriesUpdateJob implements Runnable {
 		this.areaChartSample = areaChartSample;
 	}
 
+	@Override
 	public void run() {
 		xAxisIndex++;
 		for (Iterator<NumberSeries> iterator = areaChartSample.getNumberSeries().iterator(); iterator.hasNext();) {

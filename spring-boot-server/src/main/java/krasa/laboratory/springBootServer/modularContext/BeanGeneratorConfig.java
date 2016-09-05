@@ -20,6 +20,7 @@ public class BeanGeneratorConfig implements ApplicationContextAware {
 		return new PropertySourcesPlaceholderConfigurer();
 	}
 
+	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 		this.applicationContext = applicationContext;
 	}

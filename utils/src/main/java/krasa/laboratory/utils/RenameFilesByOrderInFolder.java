@@ -27,6 +27,7 @@ public class RenameFilesByOrderInFolder {
 
 	private static File[] geFiles(File file) {
 		return file.listFiles(new FileFilter() {
+			@Override
 			public boolean accept(File f) {
 				return !f.isDirectory();
 			}
@@ -35,6 +36,7 @@ public class RenameFilesByOrderInFolder {
 
 	private static List<File> getSubdirs(File file) {
 		List<File> subdirs = Arrays.asList(file.listFiles(new FileFilter() {
+			@Override
 			public boolean accept(File f) {
 				return f.isDirectory();
 			}

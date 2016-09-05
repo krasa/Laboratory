@@ -21,6 +21,7 @@ public class PropertyInjectBeanPostProcessor extends InstantiationAwareBeanPostP
 
 	private SimpleTypeConverter typeConverter = new SimpleTypeConverter();
 
+	@Override
 	public boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
 		findPropertyAutowiringMetadata(bean);
 		return true;
@@ -28,6 +29,7 @@ public class PropertyInjectBeanPostProcessor extends InstantiationAwareBeanPostP
 
 	private void findPropertyAutowiringMetadata(final Object bean) {
 		ReflectionUtils.doWithFields(bean.getClass(), new ReflectionUtils.FieldCallback() {
+			@Override
 			public void doWith(Field field) throws IllegalArgumentException, IllegalAccessException {
 				Annotation annotation = field.getAnnotation(getAnnotationClass());
 				if (annotation != null) {
