@@ -27,6 +27,7 @@
         <module>commons-test</module>
         <module>spring-boot-server</module>
 		<module>queue</module>
+        <module>benchmark</module>
 	</modules>
 
 
