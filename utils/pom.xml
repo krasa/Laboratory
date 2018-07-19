@@ -11,5 +11,13 @@
 
 	<artifactId>utils</artifactId>
 
+	<dependencies>
+		<dependency>
+			<groupId>com.github.krasa.laboratory</groupId>
+			<artifactId>commons</artifactId>
+			<version>${laboratory.version}</version>
+		</dependency>
+	</dependencies>
+
 
 </project>
